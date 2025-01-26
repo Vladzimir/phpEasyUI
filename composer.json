@@ -1,5 +1,5 @@
 {
-  "name": "Vladzimir/phpEasyUI",
+  "name": "vladzimir/phpeasyui",
   "description": "php wrapper EasyUI without dependency",
   "type": "library",
   "keywords": [
