@@ -10,7 +10,7 @@ use Easyui\Options;
 /**
  * @method $this title(string $title) [The column title text.]
  * @method $this field(string $field) [The column field name.]
- * @method $this width(int $width) [The width of column. If not defined, the width will auto expand to fit its contents. No width definition will reduce performance.]
+ * @method $this width(string $width) [The width of column. If not defined, the width will auto expand to fit its contents. No width definition will reduce performance.]
  * @method $this rowspan(int $rowspan) [Indicate how many rows a cell should take up.]
  * @method $this colspan(int $colspan) [Indicate how many columns a cell should take up.]
  * @method $this align(DatagridColumnAlign $align) [Indicate how to align the column data. 'left', 'right', 'center' can be used.]

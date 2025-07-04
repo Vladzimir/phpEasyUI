@@ -2,7 +2,6 @@
 
 namespace Easyui\Components;
 
-use Easyui\Component;
 use Easyui\Enums\TextBoxLabelPosition;
 use Easyui\Enums\TextBoxAlign;
 use Easyui\Enums\TextBoxType;
@@ -55,9 +54,9 @@ use Easyui\Js;
  * @method $this mGetText() [Get the displaying text value.]
  * @method $this mSetValue($value) [Set the component value.]
  * @method $this mGetValue() [Get the component value.]
- * @method $this mGetIcon() [Get specified icon object.]
+ * @method $this mGetIcon($index) [Get specified icon object.]
  */
-class TextBox extends Component
+class TextBox extends ValidateBox
 {
     public const string COMPONENT_NAME = 'textbox';
 }

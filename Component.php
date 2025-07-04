@@ -8,10 +8,7 @@ use Exception;
 use JsonSerializable;
 use LogicException;
 
-use function json_encode;
 use function lcfirst;
-use function preg_replace_callback;
-use function stripcslashes;
 
 class Component implements JsonSerializable
 {
@@ -26,7 +23,7 @@ class Component implements JsonSerializable
     /**
      * @var array
      */
-    protected array $properties;
+    protected array $properties = [];
     /**
      * @var string
      */
@@ -37,10 +34,11 @@ class Component implements JsonSerializable
     protected bool $asSelector;
 
     /**
-     * @param string|null $id
-     * @param bool $asSelector
+     * @var string
      */
-    public function __construct(string|null $id, bool $asSelector = true)
+    protected string $endSymbols;
+
+    public function __construct(string|null $id, bool $asSelector = true, string $endSymbols = ';' . PHP_EOL)
     {
         if (!defined(static::class . '::COMPONENT_NAME')) {
             throw new LogicException("Class " . static::class . " must have const COMPONENT_NAME.");
@@ -48,6 +46,7 @@ class Component implements JsonSerializable
 
         $this->id = $id;
         $this->asSelector = $asSelector;
+        $this->endSymbols = $endSymbols;
     }
 
     /**
@@ -107,7 +106,7 @@ class Component implements JsonSerializable
         if ($methodValue === null) {
             $method = "('{$methodName}')";
         } else {
-            $args = $this->encode($methodValue);
+            $args = Encode::json($methodValue);
             $method = "('{$methodName}', {$args})";
         }
 
@@ -140,20 +139,20 @@ class Component implements JsonSerializable
     {
         $appends = $this->appends;
 
-        $data = $this->method ?? '(' . $this->encode($this) . ')';
+        $data = $this->method ?? '(' . Encode::json($this) . ')';
 
         $selector = '';
         $end = '';
 
         if ($this->id !== null) {
-            $end = ';';
+            $end = $this->endSymbols;
             $selector = '$(' . $this->id . ').';
 
             if ($this->asSelector) {
                 $selector = '$("#' . $this->id . '").';
             }
         } elseif (!$this->asSelector) {
-            $end = ';';
+            $end = $this->endSymbols;
             $selector = '$.';
         }
 
@@ -173,24 +172,5 @@ class Component implements JsonSerializable
     public function jsonSerialize(): ?array
     {
         return $this->properties ?: null;
-    }
-
-    /**
-     * @param $toJson
-     * @return string
-     * @throws Exception
-     */
-    protected function encode($toJson): string
-    {
-        $data = json_encode($toJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
-        if ($data === false) {
-            throw new Exception('Invalid data');
-        }
-
-        // replace markup by JS
-        return preg_replace_callback('/"::JS::(.*?)::JS::"/', function ($matches) {
-            return stripcslashes($matches[1]);
-        }, $data) ?: '';
     }
 }

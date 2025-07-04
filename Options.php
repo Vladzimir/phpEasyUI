@@ -2,6 +2,7 @@
 
 namespace Easyui;
 
+use Exception;
 use JsonSerializable;
 
 class Options implements JsonSerializable
@@ -29,5 +30,13 @@ class Options implements JsonSerializable
     public function jsonSerialize(): ?array
     {
         return $this->options ?: null;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function __toString()
+    {
+        return Encode::json($this->options);
     }
 }

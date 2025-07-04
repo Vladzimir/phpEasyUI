@@ -58,7 +58,7 @@ use Easyui\Js;
  * @method $this mDisableTab($which) [Disable the specified tab panel, the 'which' parameter can be the title or index of tab panel.]
  * @method $this mScrollBy($deltaX) [Scroll the tab header by the specified amount of pixels, negative values scroll to the right, positive values scroll to the left.]
  */
-class Tabs extends Component
+class Tabs extends Panel
 {
     public const string COMPONENT_NAME = 'tabs';
 }

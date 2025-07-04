@@ -19,7 +19,7 @@ use Easyui\Enums\DrawerRegion;
  * @method $this mExpand() [Expand the drawer.]
  * @method $this mCollapse() [Collapse the drawer.]
  */
-class Drawer extends Component
+class Drawer extends Dialog
 {
     public const string COMPONENT_NAME = 'drawer';
 }

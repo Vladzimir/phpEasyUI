@@ -3,6 +3,7 @@
 namespace Easyui\Components;
 
 use Easyui\Component;
+use Easyui\Components\Region\Panel as RegionPanel;
 use Easyui\Enums\LayoutRegion;
 use Easyui\Enums\LayoutPanelRegion;
 use Easyui\Js;
@@ -10,7 +11,6 @@ use Easyui\Js;
 /**
  * Property/Params
  * @method $this pFit(bool $fit) [Set to true to set the layout size fit its parent container. When creating layout on 'body' tag, it will be auto maximized to the full size of whole page.]
- * @method $this p() []
  *
  * Event
  * @method $this eOnCollapse(Js $onCollapse) [Fires when collapse a region panel.]
@@ -23,7 +23,7 @@ use Easyui\Js;
  * @method $this mPanel(LayoutPanelRegion $region) [Return the specified panel, the 'region' parameter possible values:'north', 'south', 'east', 'west', 'center'.]
  * @method $this mCollapse(LayoutRegion $region) [Collapse the specified panel, the 'region' parameter possible values:'north', 'south', 'east', 'west'.]
  * @method $this mExpand(LayoutRegion $region) [Expand the specified panel, the 'region' parameter possible values:'north', 'south', 'east', 'west'.]
- * @method $this mAdd($options) [Add a specified panel, the options parameter is a config object, see tab panel properties for more details.]
+ * @method $this mAdd(RegionPanel $options) [Add a specified panel, the options parameter is a config object, see tab panel properties for more details.]
  * @method $this mRemove(LayoutRegion $region) [Remove the specified panel, the 'region' parameter possible values:'north', 'south', 'east', 'west'.]
  * @method $this mSplit($region) [Split the region panel.]
  * @method $this mUnsplit($region) [Unsplit the region panel.]

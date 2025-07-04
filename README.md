@@ -21,10 +21,22 @@ append(
     mGetPager()->append(
         Easyui::pagination()->
         eOnChangePageSize(
-            new Js("function (pageSize) { $.cookie('pageSize',pageSize); }")
+            new Js(
+             <<<JS
+    function (pageSize) { 
+        $.cookie('pageSize',pageSize); 
+    }
+JS        
+            )            
         )
     )
 );
+
+echo Easyui::messager()->
+    mConfirm(
+        Easyui::messagerConfirm()->
+        title('Title')
+    );
 ```
 All property start with letter p.
 
@@ -34,7 +46,7 @@ All method start with letter m.
 ``` php
 pMethodName()
 eEventName()
-mNethodName()
+mMethodName()
 ```
 ### Output
 ``` js
@@ -42,7 +54,12 @@ $("#test").datagrid({
     "method": "get",
     "onSelect": function () { //function code }
 }).datagrid('getPager').pagination({
-    "onChangePageSize": function (pageSize) { $.cookie('pageSize',pageSize); }
+    "onChangePageSize": function (pageSize) { 
+        $.cookie('pageSize',pageSize); 
+    }
+});
+$.messager.confirm({
+    "title": "Title"
 });
 ```
 If you need to install components not as a selector, turn second variable to false

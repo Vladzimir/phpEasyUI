@@ -25,7 +25,7 @@ use Easyui\Js;
  *
  * Method
  * @method $this mSubmit(string|Js $options) [Do the submit action, the options parameter is an object which contains following properties:<br>url: the action URL<br>onSubmit: callback function before submit<br>success: callback function after submit successfully]
- * @method $this mLoad(array $data) [Load records to fill the form. The data parameter can be a string or a object type, when string acts as a remote URL, otherwise acts as a local record.]
+ * @method $this mLoad(array|string $data) [Load records to fill the form. The data parameter can be a string or a object type, when string acts as a remote URL, otherwise acts as a local record.]
  * @method $this mClear() [Clear the form data.]
  * @method $this mReset() [Reset the form data.]
  * @method $this mValidate() [Do the form fields validation, return true when all fields is valid. The method is used with the validatebox plugin.]

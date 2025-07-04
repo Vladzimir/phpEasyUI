@@ -17,7 +17,7 @@ use Easyui\Js;
  * @method $this mExpandGroup($groupIndex) [Expand specified group. If the 'groupIndex' parameter is not assigned, expand all group.]
  * @method $this mCollapseGroup($groupIndex) [Collapse specified group. If the 'groupIndex' parameter is not assigned, collapse all group.]
  */
-class PropertyGrid extends Datagrid
+class PropertyGrid extends DataGrid
 {
     public const string COMPONENT_NAME = 'propertygrid';
 }
