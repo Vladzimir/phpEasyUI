@@ -2,7 +2,6 @@
 
 namespace Easyui\Components;
 
-use Easyui\Component;
 use Easyui\Enums\DrawerRegion;
 
 /**

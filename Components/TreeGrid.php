@@ -30,6 +30,7 @@ use Easyui\Js;
  * @method $this mGetCheckedNodes() [Get all checked rows.]
  * @method $this mGetLevel($id) [Get the specified node level.]
  * @method $this mFind($id) [Find the specifed node and return the node data.]
+ * @method $this mFindBy($param) [Find the specifed node by field.]
  * @method $this mSelect($id) [Select a node.]
  * @method $this mUnselect($id) [Unselect a node.]
  * @method $this mCheckNode($id) [Set the specified row node to checked.]

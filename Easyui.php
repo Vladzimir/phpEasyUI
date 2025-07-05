@@ -49,6 +49,7 @@ use Easyui\Components\ProgressBar;
 use Easyui\Components\PropertyGrid;
 use Easyui\Components\RadioButton;
 use Easyui\Components\RadioGroup;
+use Easyui\Components\Rate;
 use Easyui\Components\Region\Panel as RegionPanel;
 use Easyui\Components\Resizable;
 use Easyui\Components\SearchBox;
@@ -118,6 +119,7 @@ use Easyui\Components\Window;
  * @method static PasswordBox passwordBox(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static RadioButton radioButton(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static RadioGroup radioGroup(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
+ * @method static Rate rate(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static Slider slider(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static Spinner spinner(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static TagBox tagBox(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
