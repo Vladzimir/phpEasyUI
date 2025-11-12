@@ -2,6 +2,7 @@
 
 namespace Easyui\Extensions;
 
+use Easyui\Components\DataGrid;
 use Easyui\Enums\Extensions\DatagridFilterFilterBtnPosition;
 use Easyui\Enums\Extensions\DatagridFilterFilterMatchingType;
 use Easyui\Enums\Extensions\DatagridFilterFilterPosition;
@@ -43,7 +44,7 @@ use Easyui\Js;
  * @method $this mGetFilterComponent($field) [Get the filter component on a specified field.]
  * @method $this mResizeFilter($field) [Resize the filter component.]
  */
-class DatagridFilter extends \Easyui\Components\DataGrid
+class DatagridFilter extends DataGrid
 {
 
 }

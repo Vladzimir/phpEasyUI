@@ -132,7 +132,7 @@ use Easyui\Components\Window;
  * @method static Window window(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static Dialog dialog(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  *
- * DataGreed and Tree
+ * DataGrid and Tree
  * @method static DataGrid dataGrid(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static DataList dataList(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  * @method static PropertyGrid propertyGrid(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
