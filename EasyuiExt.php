@@ -4,14 +4,26 @@ namespace Easyui;
 
 use BadMethodCallException;
 use Easyui\Extensions\DatagridFilter;
+use Easyui\Extensions\DatagridFilter\FilterRules;
+use Easyui\Extensions\DatagridFilter\Filters;
 
 /**
  *
  * DataGrid
- * @method static DataGridFilter dataGridFilter(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
+ * @method static DatagridFilter dataGridFilter(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  **/
 class EasyuiExt
 {
+    public static function filterRules(): FilterRules
+    {
+        return new FilterRules();
+    }
+
+    public static function filters(): Filters
+    {
+        return new Filters();
+    }
+
     public static function __callStatic(string $name, array $arguments)
     {
         $class = '\\Easyui\\Extensions\\' . ucfirst($name);
