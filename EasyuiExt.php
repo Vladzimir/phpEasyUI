@@ -10,7 +10,7 @@ use Easyui\Extensions\DatagridFilter\Filters;
 /**
  *
  * DataGrid
- * @method static DatagridFilter dataGridFilter(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
+ * @method static DatagridFilter datagridFilter(string|null $id = null, bool $asSelector = true, string $endSymbols = ';')
  **/
 class EasyuiExt
 {
