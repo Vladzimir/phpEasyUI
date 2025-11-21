@@ -13,4 +13,6 @@ enum DatagridFilterFiltersType: string
     case DATEBOX = 'datebox';
     case COMBOBOX = 'combobox';
     case COMBOTREE = 'combotree';
+    case TEXTBOX = 'textbox';
+    case TAGBOX = 'tagbox';
 }
