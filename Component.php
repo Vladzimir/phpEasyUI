@@ -41,7 +41,10 @@ class Component implements JsonSerializable
      * @var string|null
      */
     protected ?string $exportMode = null;
-    protected string $prefixLetId = 'id_';
+    /**
+     * @var string
+     */
+    protected string $prefixVarId = 'id_';
 
     public function __construct(string|null $id, bool $asSelector = true, string $endSymbols = ';' . PHP_EOL)
     {
@@ -177,24 +180,24 @@ class Component implements JsonSerializable
     /**
      * @return $this
      */
-    public function asSetLet(): static
+    public function asSetVar(): static
     {
-        $this->exportMode = 'let';
+        $this->exportMode = 'var';
         return $this;
     }
 
     /**
      * @return $this
      */
-    public function asUseLet(): static
+    public function asUseVar(): static
     {
         $this->exportMode = 'use';
         return $this;
     }
 
-    public function setPrefixLetId(string $prefixLetId): static
+    public function setPrefixVarId(string $prefixVarId): static
     {
-        $this->prefixLetId = $prefixLetId;
+        $this->prefixVarId = $prefixVarId;
         return $this;
     }
 
@@ -208,7 +211,7 @@ class Component implements JsonSerializable
         $data = $this->method ?? '(' . Encode::json($this) . ')';
 
         $id = $this->id;
-        $prefixLetId = $this->prefixLetId;
+        $prefixVarId = $this->prefixVarId;
         $selector = '';
         $end = '';
 
@@ -234,26 +237,26 @@ class Component implements JsonSerializable
         $outputData = static::COMPONENT_NAME . $data . $components . $end;
         $output = $selector . $outputData;
 
-        if ($this->exportMode === 'let') {
+        if ($this->exportMode === 'var') {
             if ($id === null || $id === '') {
-                $warn = "console.warn('Cannot export as let: component id is not set');" . PHP_EOL;
+                $warn = "console.warn('Cannot export as var: component id is not set');" . PHP_EOL;
                 return $warn . $output;
             }
 
             $cleanId = $this->cleanId($id);
 
-            return "let {$prefixLetId}{$cleanId} = {$output}";
+            return "var {$prefixVarId}{$cleanId} = {$output}";
         }
 
         if ($this->exportMode === 'use') {
             if ($id === null || $id === '') {
-                $warn = "console.warn('Cannot use let: component id is not set');" . PHP_EOL;
+                $warn = "console.warn('Cannot use var: component id is not set');" . PHP_EOL;
                 return $warn . $output;
             }
 
             $cleanId = $this->cleanId($id);
 
-            return "{$prefixLetId}{$cleanId}.{$outputData}";
+            return "{$prefixVarId}{$cleanId}.{$outputData}";
         }
 
         return $output;

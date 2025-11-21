@@ -70,6 +70,16 @@ Easyui::dataGrid('test', false)
 ``` js
 $(test).datagrid();
 ```
+New in v1.4
+``` php
+Easyui::dataGrid('test')->asSetVar();
+Easyui::dataGrid('test')->asUseVar();
+```
+### Output
+``` js
+var id_test = $('test').datagrid();
+id_test.datagrid();
+```
 
 ## Documentation 
 See in code for components or official docs EasyUI https://www.jeasyui.com/documentation/index.php
