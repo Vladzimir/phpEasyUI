@@ -37,6 +37,11 @@ class Component implements JsonSerializable
      * @var string
      */
     protected string $endSymbols;
+    /**
+     * @var string|null
+     */
+    protected ?string $exportMode = null;
+    protected string $prefixLetId = 'id_';
 
     public function __construct(string|null $id, bool $asSelector = true, string $endSymbols = ';' . PHP_EOL)
     {
@@ -123,12 +128,73 @@ class Component implements JsonSerializable
     }
 
     /**
+     * @param string $id
+     * @return array|string
+     */
+    protected function cleanId(string $id): array|string
+    {
+        return str_ireplace(['-'], ['_'], $id);
+    }
+
+    /**
      * @param $component
      * @return $this
      */
     public function append($component): static
     {
         $this->appends[] = $component;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function asSelector(): static
+    {
+        $this->asSelector = true;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function asNotSelector(): static
+    {
+        $this->asSelector = false;
+        return $this;
+    }
+
+    /**
+     * @param string $endSymbols
+     * @return $this
+     */
+    public function setEndSymbols(string $endSymbols): static
+    {
+        $this->endSymbols = $endSymbols;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function asSetLet(): static
+    {
+        $this->exportMode = 'let';
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function asUseLet(): static
+    {
+        $this->exportMode = 'use';
+        return $this;
+    }
+
+    public function setPrefixLetId(string $prefixLetId): static
+    {
+        $this->prefixLetId = $prefixLetId;
         return $this;
     }
 
@@ -141,15 +207,17 @@ class Component implements JsonSerializable
 
         $data = $this->method ?? '(' . Encode::json($this) . ')';
 
+        $id = $this->id;
+        $prefixLetId = $this->prefixLetId;
         $selector = '';
         $end = '';
 
-        if ($this->id !== null) {
+        if ($id !== null) {
             $end = $this->endSymbols;
-            $selector = '$(' . $this->id . ').';
+            $selector = "$({$id}).";
 
             if ($this->asSelector) {
-                $selector = '$("#' . $this->id . '").';
+                $selector = "$(\"#{$id}\").";
             }
         } elseif (!$this->asSelector) {
             $end = $this->endSymbols;
@@ -163,7 +231,32 @@ class Component implements JsonSerializable
             }
         }
 
-        return $selector . static::COMPONENT_NAME . $data . $components . $end;
+        $outputData = static::COMPONENT_NAME . $data . $components . $end;
+        $output = $selector . $outputData;
+
+        if ($this->exportMode === 'let') {
+            if ($id === null || $id === '') {
+                $warn = "console.warn('Cannot export as let: component id is not set');" . PHP_EOL;
+                return $warn . $output;
+            }
+
+            $cleanId = $this->cleanId($id);
+
+            return "let {$prefixLetId}{$cleanId} = {$output}";
+        }
+
+        if ($this->exportMode === 'use') {
+            if ($id === null || $id === '') {
+                $warn = "console.warn('Cannot use let: component id is not set');" . PHP_EOL;
+                return $warn . $output;
+            }
+
+            $cleanId = $this->cleanId($id);
+
+            return "{$prefixLetId}{$cleanId}.{$outputData}";
+        }
+
+        return $output;
     }
 
     /**
