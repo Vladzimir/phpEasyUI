@@ -238,7 +238,6 @@ class Component implements JsonSerializable
         $data = $this->method ?? '(' . Encode::json($this) . ')';
 
         $id = $this->id;
-        $cleanId = $this->cleanId($id);
         $prefixVarId = $this->cleanId($this->prefixVarId);
         $suffixVarId = $this->cleanId($this->suffixVarId ?: '_' . static::COMPONENT_NAME);
         $selector = '';
@@ -267,6 +266,12 @@ class Component implements JsonSerializable
         $output = $selector . $outputData;
 
         if ($this->exportMode === 'name') {
+            if ($id === null || $id === '') {
+                $warn = "console.warn('Cannot get name var: component id is not set');" . PHP_EOL;
+                return $warn . $output;
+            }
+            $cleanId = $this->cleanId($id);
+
             return "{$prefixVarId}{$cleanId}{$suffixVarId}";
         }
 
@@ -275,6 +280,7 @@ class Component implements JsonSerializable
                 $warn = "console.warn('Cannot export as var: component id is not set');" . PHP_EOL;
                 return $warn . $output;
             }
+            $cleanId = $this->cleanId($id);
 
             return "var {$prefixVarId}{$cleanId}{$suffixVarId} = {$output}";
         }
@@ -284,7 +290,7 @@ class Component implements JsonSerializable
                 $warn = "console.warn('Cannot use var: component id is not set');" . PHP_EOL;
                 return $warn . $output;
             }
-
+            $cleanId = $this->cleanId($id);
             return "{$prefixVarId}{$cleanId}{$suffixVarId}.{$outputData}";
         }
 
